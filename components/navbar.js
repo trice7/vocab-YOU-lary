@@ -27,6 +27,7 @@ const navbar = () => {
             <li><a class="dropdown-item" href="#" id="alpha">A-Z</a></li>
             <li><a class="dropdown-item" href="#" id="oldest">Oldest</a></li>
             <li><a class="dropdown-item" href="#" id="newest">Newest</a></li>
+            <li><a class="dropdown-item" href="#" id="cat-sort">Category</a></li>
           </ul>
         </li>
       </ul>

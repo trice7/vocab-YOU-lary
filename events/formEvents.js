@@ -12,6 +12,9 @@ const formEvents = (user) => {
         title: document.querySelector('#card-title').value,
         category: document.querySelector('#card-category').value,
         content: document.querySelector('#card-body').value,
+        created: new Date(),
+        isPrivate: true,
+        favorite: false,
         uid: user.uid,
       };
 
@@ -21,6 +24,21 @@ const formEvents = (user) => {
         updateCard(patchPayload).then(() => {
           getUserCards(user.uid).then(vocabCard);
         });
+      });
+    }
+
+    // Editing a card
+    if (e.target.id.includes('update-card')) {
+      const [, firebaseKey] = e.target.id.split('--');
+
+      const payload = {
+        title: document.querySelector('#card-title').value,
+        category: document.querySelector('#card-category').value,
+        content: document.querySelector('#card-body').value,
+        firebaseKey,
+      };
+      updateCard(payload).then(() => {
+        getUserCards(user.uid).then(vocabCard);
       });
     }
   });
