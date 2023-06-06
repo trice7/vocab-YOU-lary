@@ -4,7 +4,7 @@ const endpoint = client.databaseURL;
 
 // Get all cards in the database. Used for the community tab. Will most likely need to sort by privacy status.
 const getAllCards = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/cards.json`, {
+  fetch(`${endpoint}/cards.json?orderBy="isPrivate"&equalTo=false`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -80,10 +80,39 @@ const updateCard = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSingleCard = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/cards/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'applicaiton.json'
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const getFavoriteCards = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/cards.json?orderBy="uid"&equalT0="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application.json'
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const isFav = Object.values(data).filter((item) => item.favorite);
+      resolve(isFav);
+    })
+    .catch(reject);
+});
+
 export {
   getAllCards,
   getUserCards,
   delCard,
   createCard,
-  updateCard
+  updateCard,
+  getSingleCard,
+  getFavoriteCards,
 };
