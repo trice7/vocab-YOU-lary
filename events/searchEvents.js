@@ -2,7 +2,7 @@ import { getUserCards } from '../api/cards';
 import vocabCard from '../pages/cards';
 
 const searchEvent = (user) => {
-  document.querySelector('#app').addEventListener('keyup', (e) => {
+  document.querySelector('#search-bar').addEventListener('keyup', (e) => {
     e.preventDefault();
 
     const keyEvent = e.target.value.toLowerCase();

@@ -2,7 +2,7 @@ import newCard from '../components/newCard';
 import clearAll from '../utils/clearPage';
 import vocabCard from '../pages/cards';
 import {
-  delCard, getAllCards, getFavoriteCards, getSingleCard, getUserCards
+  delCard, getAllCards, getFavoriteCards, getSingleCard, getUserCards, updateCard
 } from '../api/cards';
 import comCard from '../pages/comCards';
 
@@ -51,6 +51,33 @@ const domEvents = (user) => {
     if (e.target.id.includes('community')) {
       console.warn('Clicked the Community Button');
       getAllCards().then((data) => comCard(data, user));
+    }
+
+    // Change the value of "Favorite"
+    if (e.target.id.includes('change-fav')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      // console.warn(firebaseKey);
+      getSingleCard(firebaseKey).then((obj) => {
+        const fav = obj.favorite;
+        const patchpayload = { favorite: !fav, firebaseKey };
+        console.warn(!fav);
+        updateCard(patchpayload).then(() => {
+          getUserCards(user.uid).then(vocabCard);
+        });
+      });
+    }
+
+    // Change the value of "isPrivate"
+    if (e.target.id.includes('change-priv')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleCard(firebaseKey).then((obj) => {
+        const priv = obj.isPrivate;
+        const patchpayload = { isPrivate: !priv, firebaseKey };
+
+        updateCard(patchpayload).then(() => {
+          getUserCards(user.uid).then(vocabCard);
+        });
+      });
     }
 
     // Sorting conditionals below. Each options should sort based on the display text.
