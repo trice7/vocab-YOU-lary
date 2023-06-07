@@ -16,10 +16,10 @@ const vocabCard = (arr) => {
       favBtn = `<i class="bi bi-heart-fill" id="change-fav--${item.firebaseKey}"></i>`;
     }
     if (item.isPrivate === false) {
-      privBtn = '<i class="bi bi-unlock"></i>';
+      privBtn = `<i class="bi bi-unlock" id="change-priv--${item.firebaseKey}"></i>`;
     }
     if (item.isPrivate === true) {
-      privBtn = '<i class="bi bi-lock-fill"></i>';
+      privBtn = `<i class="bi bi-lock-fill" id="change-priv--${item.firebaseKey}"></i>`;
     }
 
     domString += `
@@ -31,7 +31,7 @@ const vocabCard = (arr) => {
           <a href="#" class="card-link" id="edit-card-btn--${item.firebaseKey}">Edit</a>
           <a href="#" id="del-card-btn--${item.firebaseKey}" class="card-link">Delete</a>
           <a href="#">${favBtn}</a>
-          <a href="#" id="change-priv--${item.firebaseKey}">${privBtn}</a>
+          <a href="#">${privBtn}</a>
         </div>
       </div>
         `;
