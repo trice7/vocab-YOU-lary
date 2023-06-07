@@ -32,7 +32,7 @@ const navbar = () => {
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control me-2" type="search" id="search-bar" placeholder="Search" aria-label="Search">
       </form>
       <div id='signout-btn'></div>
     </div>
