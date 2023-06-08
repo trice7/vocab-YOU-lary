@@ -2,6 +2,7 @@ import newCard from '../components/newCard';
 import clearAll from '../utils/clearPage';
 import vocabCard from '../pages/cards';
 import {
+  createCard,
   delCard, getAllCards, getFavoriteCards, getSingleCard, getUserCards, updateCard
 } from '../api/cards';
 import comCard from '../pages/comCards';
@@ -65,6 +66,34 @@ const domEvents = (user) => {
           getUserCards(user.uid).then(vocabCard);
         });
       });
+    }
+
+    // Copying a card from the community tab.
+    if (e.target.id.includes('copy-card-btn')) {
+      // eslint-disable-next-line
+        if (window.confirm('Copy this card to your library?')) {
+        const [, firebaseKey] = e.target.id.split('--');
+
+        getSingleCard(firebaseKey).then((obj) => {
+          const payload = {
+            title: obj.title,
+            category: obj.category,
+            content: obj.content,
+            created: new Date(),
+            isPrivate: true,
+            favorite: false,
+            uid: user.uid,
+          };
+
+          createCard(payload).then(({ name }) => {
+            const patchPayload = { firebaseKey: name };
+
+            updateCard(patchPayload).then(() => {
+              getUserCards(user.uid).then(vocabCard);
+            });
+          });
+        });
+      }
     }
 
     // Change the value of "isPrivate"
