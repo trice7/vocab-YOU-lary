@@ -18,10 +18,12 @@ const comCard = (arr, user) => {
 
     domString += `
       <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          ${item.category}
+        </div>
         <div class="card-body">
-          <h5 class="card-title">${item.title}</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">${item.category}</h6>
-          <p class="card-text">${item.content}</p>
+          <h5 class="card-title" id="comm-card-title">${item.title}</h5>
+          <p class="card-text" id="comm-card-content">${item.content}</p>
           ${linkString}
         </div>
       </div>
