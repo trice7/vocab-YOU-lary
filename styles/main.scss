@@ -2,10 +2,11 @@
 @import "~bootstrap/scss/bootstrap";
 $bootstrap-icons-font-dir: "~bootstrap-icons/font/fonts";
 @import "~bootstrap-icons/font/bootstrap-icons.scss";
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital@1&display=swap');
 
 
 body {
-  background-color: antiquewhite;
+  background-color: black;
   color: brown;
   text-align: center;
   margin-top: 100px;
@@ -32,6 +33,9 @@ body {
 
   .card-header {
     text-align: left;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-style: italic;
   }
 
   .bi-heart {
@@ -56,5 +60,10 @@ body {
     position: absolute;
     bottom: 3%;
     right: 2%;
+  }
+
+  .card-title {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
   }
 }
