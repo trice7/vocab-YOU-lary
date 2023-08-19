@@ -1,5 +1,3 @@
-// import renderToDom from './render';
-
 const clearAll = () => {
   document.querySelector('#card-area').innerHTML = '';
   document.querySelector('#form-area').innerHTML = '';
