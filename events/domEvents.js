@@ -19,7 +19,6 @@ const domEvents = (user) => {
 
     // Submitting a new card
     if (e.target.id.includes('create-card')) {
-      // console.warn('Clicked Create Card');
       newCard();
     }
 
@@ -44,20 +43,17 @@ const domEvents = (user) => {
     // Favorite should show only user cards where favorite is set to true
 
     if (e.target.id.includes('favorite')) {
-      console.warn('clicked Favorite button');
       getFavoriteCards(user.uid).then((data) => vocabCard(data));
     }
 
     // Community button should display all cards with "isPrivate" set to false.
     if (e.target.id.includes('community')) {
-      console.warn('Clicked the Community Button');
       getAllCards().then((data) => comCard(data, user));
     }
 
     // Change the value of "Favorite"
     if (e.target.id.includes('change-fav')) {
       const [, firebaseKey] = e.target.id.split('--');
-      // console.warn(firebaseKey);
       getSingleCard(firebaseKey).then((obj) => {
         const fav = obj.favorite;
         const patchpayload = { favorite: !fav, firebaseKey };
@@ -111,7 +107,6 @@ const domEvents = (user) => {
 
     // Sorting conditionals below. Each options should sort based on the display text.
     if (e.target.id.includes('alpha')) {
-      console.warn('Sorthing Alphabetically');
       getUserCards(user.uid).then((data) => {
         const sorted = data.sort((a, b) => {
           if (a.title > b.title) {
@@ -128,7 +123,6 @@ const domEvents = (user) => {
 
     // Sort by Oldest
     if (e.target.id.includes('oldest')) {
-      console.warn('sorting by oldest');
       getUserCards(user.uid).then((data) => {
         const sorted = data.sort((a, b) => {
           if (a.created > b.created) {
@@ -145,7 +139,6 @@ const domEvents = (user) => {
 
     // Sort newest first
     if (e.target.id.includes('newest')) {
-      console.warn('sorting by newest');
       getUserCards(user.uid).then((data) => {
         const sorted = data.sort((a, b) => {
           if (a.created < b.created) {
